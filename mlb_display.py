@@ -6,7 +6,7 @@ from dateutil.relativedelta import *
 from os import system, name
 import time
 
-game_dict = {}
+game_diction = {}
 
 
 def clear():
@@ -19,7 +19,7 @@ def clear():
         _ = system('clear')
 
 
-def getGames():
+def getGames(game_dict):
     current_date = datetime.now()
     # Used until season restarts
     # current_date = date.fromisoformat('2019-05-02')
@@ -41,9 +41,10 @@ def getGames():
 
         diff = game.date - current_date
         diff_days = diff.days
+        diff_seconds = diff.seconds
         if key == 10:
             break
-        elif diff_days > 0:
+        elif diff_days > 0 or (diff_days == 0 and diff_seconds > 0):
             # print(game)
             # print(game.date)
             game_dict.update({key: game})
@@ -66,22 +67,33 @@ def writeGames(game_dictionary):
 
         diff_days = diff.days
 
-        if game_dictionary[game].home_team == 'Mets':
-            print('{0:10} P - {1:9} T-{2:2} {3}'.format(game_dictionary[game].away_team,
-                                                        game_dictionary[game].p_pitcher_home, diff_days,
-                                                        game_dictionary[game].game_start_time))
+        if game_dictionary[game].game_status == 'FINAL':
+            if game_dictionary[game].home_team == 'Mets':
+                print('{0:10} {1:2} Mets         {2:2} {3} EST'.format(game_dictionary[game].away_team, game_dictionary[game].away_team_runs, game_dictionary[game].home_team_runs, game_dictionary[game].game_start_time))
+            else:
+                print('Mets      {0:2}  {1:10} {2:2}   {3} EST'.format(game_dictionary[game].away_team_runs, game_dictionary[game].home_team, game_dictionary[game].home_team_runs, game_dictionary[game].game_start_time))
         else:
-            print('{0:10} P - {1:9} T-{2:2} {3}'.format(game_dictionary[game].home_team,
-                                                        game_dictionary[game].p_pitcher_away, diff_days,
-                                                        game_dictionary[game].game_start_time))
+            if game_dictionary[game].home_team == 'Mets':
+                print('{0:10} P - {1:9} T-{2:2} {3} EST'.format(game_dictionary[game].away_team,
+                                                            game_dictionary[game].p_pitcher_home, diff_days,
+                                                            game_dictionary[game].game_start_time))
+            else:
+                print('{0:10} P - {1:9} T-{2:2} {3} EST'.format(game_dictionary[game].home_team,
+                                                            game_dictionary[game].p_pitcher_away, diff_days,
+                                                            game_dictionary[game].game_start_time))
 
 
 init_time = time.perf_counter()
-d = getGames()
+d = getGames(game_diction)
+writeGames(d)
+for i in range(7):
+    print(' ')
 while True:
 
-    clear()
-    writeGames(d)
     current_time = time.perf_counter()
     if current_time - init_time > 3600:
-        d = getGames()
+        clear()
+        d = getGames(game_diction)
+        writeGames(d)
+        # for i in range(7):
+        #     print(' ')
