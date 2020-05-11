@@ -9,6 +9,13 @@ import time
 game_diction = {}
 
 
+class Static:
+    def __init__(self):
+        pass
+
+    counter = 0
+
+
 def clear():
     # for windows
     if name == 'nt':
@@ -32,6 +39,8 @@ def getGames(game_dict):
 
     # use current year when season comes back
     month = mlbgame.games(2020, current_month, home='Mets', away='Mets')
+    print(Static.counter)
+    Static.counter += 1
     games = mlbgame.combine_games(month)
     key = 0
 
@@ -69,18 +78,24 @@ def writeGames(game_dictionary):
 
         if game_dictionary[game].game_status == 'FINAL':
             if game_dictionary[game].home_team == 'Mets':
-                print('{0:10} {1:2} Mets         {2:2} {3} EST'.format(game_dictionary[game].away_team, game_dictionary[game].away_team_runs, game_dictionary[game].home_team_runs, game_dictionary[game].game_start_time))
+                print('{0:10} {1:2} Mets         {2:2} {3} EST'.format(game_dictionary[game].away_team,
+                                                                       game_dictionary[game].away_team_runs,
+                                                                       game_dictionary[game].home_team_runs,
+                                                                       game_dictionary[game].game_start_time))
             else:
-                print('Mets      {0:2}  {1:10} {2:2}   {3} EST'.format(game_dictionary[game].away_team_runs, game_dictionary[game].home_team, game_dictionary[game].home_team_runs, game_dictionary[game].game_start_time))
+                print('Mets      {0:2}  {1:10} {2:2}   {3} EST'.format(game_dictionary[game].away_team_runs,
+                                                                       game_dictionary[game].home_team,
+                                                                       game_dictionary[game].home_team_runs,
+                                                                       game_dictionary[game].game_start_time))
         else:
             if game_dictionary[game].home_team == 'Mets':
                 print('{0:10} P - {1:9} T-{2:2} {3} EST'.format(game_dictionary[game].away_team,
-                                                            game_dictionary[game].p_pitcher_home, diff_days,
-                                                            game_dictionary[game].game_start_time))
+                                                                game_dictionary[game].p_pitcher_home, diff_days,
+                                                                game_dictionary[game].game_start_time))
             else:
-                print('{0:10} P - {1:9} T-{2:2} {3} EST'.format(game_dictionary[game].home_team,
-                                                            game_dictionary[game].p_pitcher_away, diff_days,
-                                                            game_dictionary[game].game_start_time))
+                print('@{0:9} P - {1:9} T-{2:2} {3} EST'.format(game_dictionary[game].home_team,
+                                                                game_dictionary[game].p_pitcher_away, diff_days,
+                                                                game_dictionary[game].game_start_time))
 
 
 init_time = time.perf_counter()
@@ -92,8 +107,8 @@ while True:
 
     current_time = time.perf_counter()
     if current_time - init_time > 3600:
-        clear()
+        # clear()
         d = getGames(game_diction)
         writeGames(d)
-        # for i in range(7):
-        #     print(' ')
+        for i in range(7):
+            print(' ')
