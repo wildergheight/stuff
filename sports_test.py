@@ -104,8 +104,8 @@ def getSchedule():
     # sports += ' ' + sports_out[3]
     # sports += ' ' + sports_out[4]
 
-    print(sports_out)
-    print(sports)
+    # print(sports_out)
+    # print(sports)
     print(team_dict[game_dict[0].opponent][0])
     print(team_dict[game_dict[1].opponent][0])
     print(team_dict[game_dict[2].opponent][0])
@@ -141,11 +141,11 @@ def inGame(game_link, opp_id):
         time_remaining = game_get['liveData']['linescore']['currentPeriodTimeRemaining']
         home_score = game_get['liveData']['linescore']['teams']['home']['goals']
         if home_score != prev_goal_h:
-            goalScored(game_get, opp_id, 1)
+            goalScored(game_get, opp, 1)
             prev_goal_h = home_score
         away_score = game_get['liveData']['linescore']['teams']['away']['goals']
         if away_score != prev_goal_a:
-            goalScored(game_get, opp_id, 0)
+            goalScored(game_get, opp, 0)
             prev_goal_a = away_score
 
         time.sleep(.5)  # delay repeating function half a second to avoid hammering the api too much

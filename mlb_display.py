@@ -39,7 +39,7 @@ def getGames(game_dict):
 
     # use current year when season comes back
     month = mlbgame.games(2020, current_month, home='Mets', away='Mets')
-    print(Static.counter)
+    # print(Static.counter)
     Static.counter += 1
     games = mlbgame.combine_games(month)
     key = 0
@@ -53,7 +53,7 @@ def getGames(game_dict):
         diff_seconds = diff.seconds
         if key == 10:
             break
-        elif diff_days > 0 or (diff_days == 0 and diff_seconds > 0):
+        elif diff_days > -2 or (diff_days == 0 and diff_seconds > 0):
             # print(game)
             # print(game.date)
             game_dict.update({key: game})
@@ -109,6 +109,7 @@ while True:
     if current_time - init_time > 3600:
         # clear()
         d = getGames(game_diction)
+        init_time = current_time
         writeGames(d)
         for i in range(7):
             print(' ')
