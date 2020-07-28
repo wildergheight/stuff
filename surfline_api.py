@@ -16,7 +16,7 @@ class tide:
 def getSurf():
     tides = []
 
-    url = "https://services.surfline.com//kbyg/spots/reports?spotId=5842041f4e65fad6a77088cc"
+    url = "https://services.surfline.com//kbyg/spots/reports?spotId=5842041f4e65fad6a77088cc"   #5d7687fdb4c559000112e666
     response = requests.get(url)
 
     surf_get = json.loads(response.text)

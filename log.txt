@@ -1,0 +1,2 @@
+20200727_19:19:59 - ERROR! <urlopen error [Errno 11001] getaddrinfo failed>
+20200727_19:20:00 - ERROR! <urlopen error [Errno 11001] getaddrinfo failed>

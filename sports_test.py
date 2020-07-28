@@ -40,7 +40,7 @@ class Game_data:
         self.opponent = 0
 
 
-current_d = datetime(2019, 1, 13)
+current_d = datetime.now()
 
 
 def getSchedule():
@@ -176,7 +176,7 @@ def goalScored(game, opp_id, home_away_scored):
 
 
 getSchedule()
-current_d = datetime(2019, 2, 13)
-getSchedule()
+# current_d = datetime(2019, 2, 13)
+# getSchedule()
 pass
 # inGame(game_dict[0].gamelink, game_dict[0].opponent)  # for testing, will be called in the schedule function
