@@ -2,6 +2,7 @@ import requests
 import json
 from datetime import datetime
 from datetime import timedelta
+from termcolor import colored
 import time
 
 current_date = datetime.utcnow()
@@ -60,7 +61,13 @@ def getStandings():
         teamrecord_points = standings_get['records'][0]['teamRecords'][x]['points']
         teamstreak = standings_get['records'][0]['teamRecords'][x]['streak']['streakCode']
         games_played = teamrecord_ot + teamrecord_losses + teamrecord_wins
-        print('  {0:25} {6:2}  {1:2}, {2:1},{3:1},{4:1}   {5:3}'.format(teamname, teamrecord_points, teamrecord_wins,
+        if teamname == "New York Rangers":
+            print('  {0:25}          {6:2}  {1:2}, {2:1},{3:1},{4:1}   {5:3}'.format(colored(teamname, 'green'), teamrecord_points,
+                                                                            teamrecord_wins,
+                                                                            teamrecord_losses, teamrecord_ot,
+                                                                            teamstreak, games_played))
+        else:
+            print('  {0:25} {6:2}  {1:2}, {2:1},{3:1},{4:1}   {5:3}'.format(teamname, teamrecord_points, teamrecord_wins,
                                                                  teamrecord_losses, teamrecord_ot, teamstreak, games_played))
 
 
