@@ -13,7 +13,7 @@ class Static:
     def __init__(self):
         pass
 
-    teamname = 'Mets'
+    teamname = 'Padres'
     end_game = False
 
 

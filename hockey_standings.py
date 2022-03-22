@@ -53,7 +53,7 @@ def getStandings():
     for x in range(8):
         print(' ')
     print('                            GP Pts  W L OTL')
-    for x in range(7):
+    for x in range(8):
         teamname = standings_get['records'][0]['teamRecords'][x]['team']['name']
         teamrecord_wins = standings_get['records'][0]['teamRecords'][x]['leagueRecord']['wins']
         teamrecord_losses = standings_get['records'][0]['teamRecords'][x]['leagueRecord']['losses']
@@ -62,7 +62,7 @@ def getStandings():
         teamstreak = standings_get['records'][0]['teamRecords'][x]['streak']['streakCode']
         games_played = teamrecord_ot + teamrecord_losses + teamrecord_wins
         if teamname == "New York Rangers":
-            print('  {0:25}          {6:2}  {1:2}, {2:1},{3:1},{4:1}   {5:3}'.format(colored(teamname, 'green'), teamrecord_points,
+            print('  {0:25}          {6:2}  {1:2}, {2:2},{3:2},{4:2}   {5:3}'.format(colored(teamname, 'green'), teamrecord_points,
                                                                             teamrecord_wins,
                                                                             teamrecord_losses, teamrecord_ot,
                                                                             teamstreak, games_played))
